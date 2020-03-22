@@ -1,6 +1,10 @@
 <?php
     require_once'lib/library.php';
     $db = new DB();
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['add_user']){
+        $db->addNewUser();
+        exit;
+    }
     $users = $db->getUsers();
 ?>
 <!doctype html>
@@ -11,6 +15,7 @@
 </head>
 <body>
 <div style="max-width: 1170px; margin: 30px auto">
+    <button class="add-user" style="margin-bottom: 10px;">Добавить пользователя</button>
     <div class="users-container">
         <?php foreach ($users as $user) : ?>
             <div class="user">
@@ -25,7 +30,8 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <button class="add-user" style="margin-top: 10px;">Добавить пользователя</button>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="/js/scripts.js"></script>
 </body>
 </html>
